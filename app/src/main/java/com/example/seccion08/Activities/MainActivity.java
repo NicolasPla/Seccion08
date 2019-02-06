@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.example.seccion08.Adapters.PagerAdapter;
 import com.example.seccion08.R;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        final ViewPager viewPager = findViewById(R.id.viewPager);
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
         viewPager.setAdapter(adapter);
@@ -37,16 +38,20 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                
+                Toast.makeText(MainActivity.this, "Selected -->" + tab.getText(), Toast.LENGTH_SHORT).show();
+                int position = tab.getPosition();
+                viewPager.setCurrentItem(position);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                Toast.makeText(MainActivity.this, "Unselected -->" + tab.getText(), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                Toast.makeText(MainActivity.this, "Reselected -->" + tab.getText(), Toast.LENGTH_SHORT).show();
 
             }
         });
